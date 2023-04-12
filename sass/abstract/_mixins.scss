@@ -1,0 +1,71 @@
+@mixin clearFix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin absCeter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Media Queries Manager
+
+/*
+
+0 - 600px           Phone                   xsm
+600 - 900px         Tablet Portrait         sm
+900 - 1200px        Tablet landscape        md
+[1200 - 1800px]     Normal style applies    lg
+>1800px             Big Desktop             xlg
+
+*/
+
+/*
+
+Breakpoints argument choices (1em = 16px by default)
+xsm     max 600px   -> 37.5em (600/16)
+sm      max 900px   -> 56.25em
+md      max 1200px  -> 75em
+xlg     min 1800px  -> 112.5em 
+
+ORDER : base + typography > general layout + grid > page layout > components
+*/
+
+@mixin responsive($breakpoint) {
+    @if $breakpoint ==xsm {
+        @media only screen and (max-width: 37.5em) {
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint ==sm {
+        @media only screen and (max-width: 56.25em) {
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint ==md {
+        @media only screen and (max-width: 75em) {
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint ==xlg {
+        @media only screen and (min-width: 112.5em) {
+            @content
+        }
+
+        ;
+    }
+}
